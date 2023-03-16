@@ -8,14 +8,13 @@ import java.util.Date;
  * java.text 패키지
  * 소수점, 콤마...등 표현 
 
-
 */
 
 public class SimpleDateFormatEx1 {
 
 	public static void main(String[] args) {
 		
-		
+		// 시스템 날짜와 시간 가져오기 
 		Date date = new Date();
 		System.out.println(date);
 		
