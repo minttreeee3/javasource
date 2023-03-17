@@ -10,6 +10,12 @@ public class Test {
 	public int sum() {
 		return 0;
 	}
+	@Override
+	public String toString() {
+		return "Test [name=" + name + ", no=" + no + ", tel=" + tel + "]";
+	}
+	
+	
 	
 
 }
