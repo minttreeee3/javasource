@@ -14,6 +14,12 @@ public class Test {
 	public String toString() {
 		return "Test [name=" + name + ", no=" + no + ", tel=" + tel + "]";
 	}
+	public Test(String name, int no, String tel) {
+		super();
+		this.name = name;
+		this.no = no;
+		this.tel = tel;
+	}
 	
 	
 	
