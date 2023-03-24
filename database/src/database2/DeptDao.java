@@ -61,9 +61,18 @@ public class DeptDao {
 			}
 		}
 	
+		public void close(Connection con, PreparedStatement pstmt) {
+			try {
+				pstmt.close();
+				con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
+
 		
-		//select-하나
+		//select-하나 (Main의 case1)
 		public DeptDTO getRow(int deptno) {
 		
 			//커넥션 가져오기
@@ -111,10 +120,11 @@ public class DeptDao {
 			}
 			
 			return dto;
-		}
+		}  // getRow 메소드 끝
+		
 	
 	
-		//select-all
+		//select-all (Main의 case2)
 		public ArrayList<DeptDTO> getRows() {
 			
 			// 여러줄이라서 list를 만듦
@@ -159,10 +169,166 @@ public class DeptDao {
 			}
 			
 			return list;
+						
+		} // getRows 메소드 끝
 
+
+		
+		
+		// 새 부서 추가 메소드 - 사용자 입력 결과를 DAO클래스로 넘기는 방법(Main의 case3의 방법2)
+		public boolean insert(DeptDTO dto) { 
+					
+					boolean status = false;
+									
+					try {
+						
+						con = getConnection();
+						
+						String sql = "insert into dept_temp(deptno, dname, loc) values(?,?,?)";
+						
+						pstmt = con.prepareStatement(sql);
+						
+						// ?처리 -dto만들었으니까 불러올수있음
+						pstmt.setInt(1, dto.getDeptno());
+						pstmt.setString(2, dto.getDname());
+						pstmt.setString(3, dto.getLoc());
+						
+						
+						int result = pstmt.executeUpdate();  //DML에선 executeUpdate() 사용 
+						
+						if(result>0) status=true;
+						
+						
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						close(con, pstmt);
+					}
+					
+					return status;
+					
+				} //insert() 끝
+		
+		
+		
+		
+		
+		// 새 부서 추가 메소드 (Main의 case3)  -방법1		
+		public boolean insert(int deptno, String dname, String loc) { 
+			// status를 리턴하니까 status의 타입인 boolean을 써줌, Main에서 입력받은 변수들 여기서 받아서 써야하니까 ()안에 넣어줌
+			
+			//DML작업은 성공한 행의 갯수만 전달받음 => ResultSet 사용x, int로 받음 
+			
+			// insert성공여부  => result>0이면 성공임 (행의 갯수가 넘어온단뜻이니까)
+			boolean status = false;
 			
 			
-		}
+			try {
+				
+				con = getConnection();
+				
+				String sql = "insert into dept_temp(deptno, dname, loc) values(?,?,?)";
+				
+				pstmt = con.prepareStatement(sql);
+				
+				// ?처리
+				pstmt.setInt(1, deptno);
+				pstmt.setString(2, dname);
+				pstmt.setString(3, loc);
+				
+				
+				int result = pstmt.executeUpdate();  //DML에선 executeUpdate() 사용 
+				
+				if(result>0) status=true;
+				
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(con, pstmt);
+			}
+			
+			return status;
+			
+		} //insert() 끝
+
+
+		
+		
+		// 부서 정보 수정 메소드 (Main의 case4)
+		public boolean update(String value, int deptno, int updateNo) { //sql문에서 뭘 받아와야하는지 생각해서 ()안에 쓰기 
+			
+			boolean status = false;
+			String sql = null;
+			
+			try {
+				
+				con = getConnection();
+				
+				if(updateNo==1) {
+					// 부서 수정
+					sql = "update dept_temp set dname=? where deptno=?";					
+				} else if(updateNo==2) {
+					// 위치 수정
+					sql = "update dept_temp set loc=? where deptno=?";										
+				}
+				
+				pstmt = con.prepareStatement(sql);
+				
+				// ?처리
+				pstmt.setString(1, value);
+				pstmt.setInt(2, deptno);
+				
+				int result = pstmt.executeUpdate();
+				
+				if(result>0) status = true;
+				
+								
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(con, pstmt);
+			}
+			return status;
+		} // update메소드 끝
+
+
+		
+		
+		// 부서 정보 삭제 메소드 (Main의 case5)
+		public boolean remove(int deptno) {
+			boolean status = false;
+						
+			
+			try {
+				
+				con = getConnection();
+				
+				// deptno 일치한 부서 삭제
+				String sql = "delete from dept_temp where deptno=?";
+				
+				pstmt = con.prepareStatement(sql);
+				
+				//?처리
+				pstmt.setInt(1, deptno);
+				
+				int result = pstmt.executeUpdate();
+				
+				if(result>0) status = true;
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(con, pstmt);
+			}
+			return status;			
+		}  //remove메소드 끝
+		
+		
 		
 		
 			
