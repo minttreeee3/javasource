@@ -65,8 +65,7 @@ public class EmpDAO {
 	}
 	
 	
-	// select - many : 무조건 ArrayList로 리턴 
-	
+	// select - many : 무조건 ArrayList로 리턴 	(Main의 case5)
 	public ArrayList<EmpDTO> getList(String ename) { // 받아야하는 ? 에 맞춰서 String ename
 		
 		ArrayList<EmpDTO> list = new ArrayList<>();		
@@ -100,13 +99,11 @@ public class EmpDAO {
 			close(con, pstmt, rs);
 		} 
 		return list;						
-	}
+	} //getList 끝
 	
 	
 	
-	
-	// select - one : DTO 리턴
-	
+	// select - one : DTO 리턴	(Main의 case4)
 	public EmpDTO getRow(int empno) {
 		EmpDTO empDTO = null;
 		
@@ -139,7 +136,37 @@ public class EmpDAO {
 			close(con, pstmt, rs);
 		}		
 		return empDTO;		
-	}
+	} //getRow 끝
+	
+	
+	// 급여 수정  (Main의 case3) 
+	public boolean update(int sal, int empno) {
+		boolean status = false;
+		String sql = null;
+		
+		try {
+			
+			con = getConnection();
+			
+			//사번이 일치하면 급여 수정
+			sql = "update emp_temp set sal=? where empno=?";							
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, sal);
+			pstmt.setInt(2, empno);
+			
+			int result = pstmt.executeUpdate();
+			if(result>0) status=true;
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(con, pstmt);
+		}
+		return status;
+	} //update 끝
 	
 	
 	
