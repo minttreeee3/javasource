@@ -15,6 +15,7 @@ public class EmpDAO {
 	private Connection con;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
+
 	
 	
 	//드라이버로드
@@ -87,7 +88,7 @@ public class EmpDAO {
 				empDTO.setEname(rs.getString(2));
 				empDTO.setJob(rs.getString(3));
 				empDTO.setHiredate(rs.getDate(4));
-				
+				//갖고나온 데이터를 empDTO에 담아서 list에 추가 
 				list.add(empDTO);
 			}
 			
@@ -106,6 +107,39 @@ public class EmpDAO {
 	
 	// select - one : DTO 리턴
 	
+	public EmpDTO getRow(int empno) {
+		EmpDTO empDTO = null;
+		
+		try {
+			
+			con = getConnection();
+			
+			// where절에 pk(primary key=기본키 -> 중복불가, null불가)가 조건으로 들어오는경우 무조건 하나의 행이 나옴
+			// empno, deptno 등이 pk임
+			String sql = "select empno, ename, job, sal, comm, deptno from emp_temp where empno=?"; 
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, empno);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				empDTO = new EmpDTO();
+				empDTO.setEmpno(rs.getInt(1));
+				empDTO.setEname(rs.getString(2));
+				empDTO.setJob(rs.getString(3));
+				empDTO.setSal(rs.getInt(4));
+				empDTO.setComm(rs.getInt(5));
+				empDTO.setDeptno(rs.getInt(6));
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(con, pstmt, rs);
+		}		
+		return empDTO;		
+	}
 	
 	
 	
