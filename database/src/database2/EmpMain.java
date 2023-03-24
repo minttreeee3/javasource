@@ -47,7 +47,15 @@ public class EmpMain {
 				//하나 조회
 				EmpDTO row = empDAO.getRow(empno);				
 				//출력
-				System.out.println(row);
+//				System.out.println(row);  => toString 형식으로 출력됨
+				System.out.println("\n***사원정보 조회***");
+				System.out.println("사원번호 : "+row.getEmpno());
+				System.out.println("사원명 : "+row.getEname());
+				System.out.println("직무 : "+row.getJob());
+				System.out.println("급여 : "+row.getSal());
+				System.out.println("추가수당 : "+row.getComm());
+				System.out.println("부서번호 : "+row.getDeptno());
+				System.out.println();
 				
 				break;
 			case 5: //사원조회(이름) - 리턴 여러개일수도 있음 
