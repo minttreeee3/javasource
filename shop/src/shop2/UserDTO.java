@@ -16,5 +16,9 @@ public class UserDTO {
 	private String name;
 	private int payNo;
 	
+	//card, cash 정보를 담을 변수
+	private String type;
+	
+	
 }	
 	

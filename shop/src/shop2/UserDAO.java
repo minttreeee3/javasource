@@ -1,6 +1,7 @@
 package shop2;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -61,13 +62,15 @@ public class UserDAO {
 			con = getConnection();
 			
 			//suser 전체조회
-			String sql = "select * from suser";
+			//String sql = "select * from suser";
+			String sql = "SELECT U.user_id, U.name, P.pay_no, P.info ";
+				sql += "FROM PAYTYPE P JOIN SUSER U ON P.PAY_NO = U.PAY_NO";
 			
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				UserDTO dto = new UserDTO(rs.getInt(1), rs.getString(2), rs.getInt(3));
+				UserDTO dto = new UserDTO(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4));
 				list.add(dto);
 			}
 			

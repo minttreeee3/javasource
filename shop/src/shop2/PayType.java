@@ -1,13 +1,17 @@
 package shop2;
 
-//열거타입 enum
-//한정된 값만 갖는 데이터 타입 
-// 요일명처럼 고정이고 변경되지 않는 형태 - 상수형태로 선언이 가능 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 
-//결제 시 카드,현금만 허용
-public enum PayType {
+@AllArgsConstructor @NoArgsConstructor
+@Setter @Getter @ToString
+public class PayType {
 	
-	CASH,CARD
+	private int payNo;
+	private String info;
 
 }
