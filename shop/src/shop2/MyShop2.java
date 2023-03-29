@@ -187,7 +187,7 @@ public class MyShop2 implements IShop {
 				
 		} //productlist끝
 	
-	int sum;
+
 	
 	public void checkOut() {
 		System.out.println(title+" : 체크아웃");
