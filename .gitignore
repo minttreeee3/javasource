@@ -99,5 +99,6 @@ replay_pid*
 
 .classpath
 .project
-[crs]*/.gitignore
+[a-z]*/.gitignore
+Servers/
 
