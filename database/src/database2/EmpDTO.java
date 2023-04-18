@@ -14,6 +14,7 @@ import lombok.ToString;
 
 @AllArgsConstructor @NoArgsConstructor
 @Getter @Setter @ToString
+
 public class EmpDTO {
 	
 	private int empno;
