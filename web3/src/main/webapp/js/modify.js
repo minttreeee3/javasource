@@ -6,6 +6,11 @@
  * 
  */
 
+ document.querySelector(".btn-primary").addEventListener("click", () => {	 
+	 location.href = "listPro.jsp";
+ });
+ 
+
  const addr = document.querySelector("#newaddr");
  const mobile = document.querySelector("#newmobile");
  

@@ -24,7 +24,11 @@
 	
 	<% //DTO로 담은거 불러오기
 	
-		LoginDTO loginDTO = (LoginDTO)session.getAttribute("loginDTO");  //타입이 안맞아서 형변환 한거임 
+		// LoginDTO loginDTO = (LoginDTO)session.getAttribute("loginDTO");  //타입이 안맞아서 형변환 한거임 
+		
+		// EL(Expression Language) : jsp에서 데이터를 추출하는 표현식 
+		//							setAttribute()로 담아놓은 값을 쉽게 찾아다 쓰기
+		//							${이름.변수명} 으로 간단하게 (setAttribute을 담은 이름, 사용했던 변수명)
 	
 	%>
 	
@@ -33,8 +37,10 @@
 		<%-- <li>아이디 : <%=session.getAttribute("id") %></li>
 		<li>비밀번호 : <%=session.getAttribute("pwd") %></li> --%>
 		
-		<li>아이디 : <%=loginDTO.getUserId() %></li>
-		<li>비밀번호 : <%=loginDTO.getPassword() %></li>
+		<%-- <li>아이디 : <%=loginDTO.getUserId() %></li>
+		<li>비밀번호 : <%=loginDTO.getPassword() %></li> --%>
+		<li>아이디 : ${loginDTO.userId}</li>
+		<li>비밀번호 : ${loginDTO.password}</li>
 	</ul>
 </body>
 </html>
