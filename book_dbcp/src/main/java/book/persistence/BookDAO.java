@@ -8,6 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
 import book.domain.BookDTO;
 
 public class BookDAO {
@@ -17,28 +21,21 @@ public class BookDAO {
 	private ResultSet rs;
 		
 	
-	// 드라이버 로드	
-	static {
-		try {
-			Class.forName("oracle.jdbc.OracleDriver");		
-		} catch(ClassNotFoundException e) {
-			e.printStackTrace();
-		}		
-	}
-	
-	
 	// DB서버 연결
 	public Connection getConnection() {
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-		String user = "javadb";
-		String password = "12345";
+		
 		
 		try {
-			Connection con = DriverManager.getConnection(url, user, password);
+			// dbcp로 바꾸면서 
+			Context ctx = new InitialContext();
+			
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/myoracle");
+			
+			Connection con = ds.getConnection();
 			//DML 실행 시 트랜잭션 관리를 직접 하겠다는 구문 - 원래 안쓰면 true(자동커밋)인데, false로 써서 직접관리하겠다고 
 			con.setAutoCommit(false);
 			return con;
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;

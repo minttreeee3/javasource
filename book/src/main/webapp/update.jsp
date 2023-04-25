@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/include/header.jsp" %>
 
-	<h1>도서 상세 조회</h1>
+	<h1>도서 정보 삭제</h1>
 	
 <form action="" method="post">
   <div class="mb-3">
@@ -27,11 +27,12 @@
   </div>
 
   <button type="button" class="btn btn-primary">목록으로</button>
-  <button type="button" class="btn btn-success">수정</button>
+  <button type="submit" class="btn btn-success">수정</button>
+  <button type="button" class="btn btn-danger">삭제</button>
 </form>
 <script>
 	// read.js에서 불러다 쓰기 위해서 만들어두는 변수
 	const code = ${dto.code}; 
 </script>
-<script src="/js/read.js"></script>
+<script src="/js/update.js"></script>
 <%@ include file="/include/footer.jsp" %>
