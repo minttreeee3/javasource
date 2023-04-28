@@ -97,23 +97,36 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
         </li>
-        <li class="nav-item">
         
-        <!-- 로그인/로그아웃을 c:if로 -세션에 담아뒀기땜에 여기서도 달러로 불러쓸수있음 -->
+        
         <c:if test="${loginDto == null}"> 
+        <!-- 로그인/로그아웃을 c:if로 -세션에 담아뒀기땜에 여기서도 달러로 불러쓸수있음 -->
+        <li class="nav-item">
           <a class="nav-link" href='<c:url value="/login.jsp" />'>로그인</a>
-        </c:if>
-		<c:if test="${loginDto != null}">
-          <a class="nav-link" href='<c:url value="/logout.do" />'>로그아웃</a>
-		</c:if>       
-		
         </li>
+        
         <li class="nav-item">
           <a class="nav-link" href='<c:url value="/register.jsp" />'>회원가입</a>
         </li>
+        </c:if>
+
+		<c:if test="${loginDto != null}">
+        <li class="nav-item">
+          <a class="nav-link" href='<c:url value="/logout.do" />'>로그아웃</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href='<c:url value="/changePwd.jsp" />'>비밀번호변경</a>
+		</li>
+        <li class="nav-item">
+          <a class="nav-link" href='<c:url value="/leave.jsp" />'>회원탈퇴</a>
+		</li>
+
         <li class="nav-item">
           <a class="nav-link" href="">회원조회</a>
-        </li>
+  		</li>
+		</c:if>       
+		
+        
         <li class="nav-item">
           <a class="nav-link">Disabled</a>
         </li>
