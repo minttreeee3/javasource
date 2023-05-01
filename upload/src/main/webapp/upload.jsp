@@ -49,7 +49,7 @@ if(isMultipart) {
 	        //파일저장
 	        if(!name.isEmpty()) {
 	        	// 만들어둔 파일 경로
-	        	String path = "c:\\upload"; 	        	
+	        	String path = "D:\\eclipse\\upload"; 	        	
 	        	// 파일 객체 생성 
 	        	File f = new File(path+"\\"+value);
 	        	//파일저장
