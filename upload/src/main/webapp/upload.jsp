@@ -1,3 +1,5 @@
+<%@page import="java.net.URLEncoder"%>
+<%@page import="java.util.UUID"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="org.apache.commons.fileupload.FileItem"%>
 <%@page import="java.util.List"%>
@@ -49,14 +51,27 @@ if(isMultipart) {
 	        //파일저장
 	        if(!name.isEmpty()) {
 	        	// 만들어둔 파일 경로
-	        	String path = "D:\\eclipse\\upload"; 	        	
+	        	String path = "D:\\eclipse\\upload"; 	      
+	        	
+	        	// 그냥저장하면 중복된 파일은 처음올린것만 저장됨 ->중복되지 않게하기위해 파일명앞에 고유값을 넣어줌
+	        	// 고유값 생성 (자바 유틸)
+	        	UUID uuid = UUID.randomUUID();
+	        		        	
 	        	// 파일 객체 생성 
-	        	File f = new File(path+"\\"+value);
+	        	File f = new File(path+"\\"+uuid.toString()+"_"+value);
 	        	//파일저장
 	        	item.write(f);  
+	        	
+	        	
+	        	
+	        	// 다운로드를 위한 링크 생성
+	        	String encodeName = URLEncoder.encode(f.getName(), "utf-8"); // 인코딩(특수문자도 됨)
+	        	
+	        	out.print("<p>");
+	        	out.print("<a href='download.jsp?fileName="+encodeName+"'>"+value+"</a>");
+	        	out.print("</p>");
 	        }
-	        
-	        
+	        	        
 	    }
 	}
 	
