@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="include/header.jsp"%>
 <main>
-	<h2>Board Write</h2>
+	<h2>Board List</h2>
 	
 	<table class="table">
   		<thead>
@@ -19,7 +19,7 @@
  	 		<c:forEach var="dto" items="${list}">	
     		<tr>
       			<th scope="row">${dto.bno}</th>
-      			<td>${dto.title}</td>
+      			<td><a href='<c:url value="/cntUpdate.do?bno=${dto.bno}"/>'>${dto.title}</a></td>
       			<td>${dto.name}</td>
       			<td>${dto.regDate}</td>
       			<td>${dto.cnt}</td>      

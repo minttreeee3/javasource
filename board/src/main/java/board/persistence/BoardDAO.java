@@ -154,5 +154,148 @@ public class BoardDAO {
 		return list;
 	} //getRows끝 
 	
+	
+	
+	//게시글 하나 조회
+		public BoardDTO getRow(int bno){
+			BoardDTO dto = null;
+			
+			try {
+				con = getConnection();
+				
+				String sql = "select bno,name,title,content,attach from board where bno=?";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, bno);
+				
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					dto = new BoardDTO();
+					dto.setBno(rs.getInt("bno"));
+					dto.setName(rs.getString("name"));
+					dto.setTitle(rs.getString("title"));
+					dto.setContent(rs.getString("content"));
+					dto.setAttach(rs.getString("attach"));
+				}			
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(con, pstmt, rs);
+			}
+			return dto;
+		} //getRow끝
+		
+		
+		
+		//조회수 증가
+		//update board set cnt=cnt+1 where bno=3
+		public boolean readCnt(int bno){
+			boolean flag=false;
+			
+			try {
+				con = getConnection();
+				String sql = "update board set cnt=cnt+1 where bno=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, bno);
+				
+				int result = pstmt.executeUpdate();
+				
+				if(result>0) {
+					flag=true;
+					commit(con);
+				}			
+			} catch (Exception e) {
+				rollback(con);
+				e.printStackTrace();
+			} finally {
+				close(con, pstmt);
+			}
+			
+			return flag;
+		} // readCnt끝
+		
+		
+		
+		//업데이트
+		//title,content 수정 (bno, 비번일치시) + attach(옵션 -들어올수도 아닐수도) 
+		public boolean updateArticle(BoardDTO updateDto) {
+			boolean flag = false;
+			
+			try {
+				
+				con = getConnection();				
+				
+				String sql = "";
+				if(updateDto.getAttach() == null) {					
+					sql += "update board set title=?, content=? where bno=? and password=?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, updateDto.getTitle());
+					pstmt.setString(2, updateDto.getContent());
+					pstmt.setInt(3, updateDto.getBno());
+					pstmt.setString(4, updateDto.getPassword());					
+					
+				} else {
+					
+					sql += "update board set title=?, content=?, attach=? where bno=? and password=?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, updateDto.getTitle());
+					pstmt.setString(2, updateDto.getContent());
+					pstmt.setString(3, updateDto.getAttach());
+					pstmt.setInt(4, updateDto.getBno());
+					pstmt.setString(5, updateDto.getPassword());
+					
+				}
+								
+				int result = pstmt.executeUpdate();
+				
+				if(result>0) {
+					flag = true;
+					commit(con);
+				}
+				
+			} catch (Exception e) {
+				rollback(con);
+				e.printStackTrace();				
+			} finally {
+				close(con, pstmt);
+			}
+			return flag;
+		} //update끝
+		
+		
+		//삭제 (bno,password일치시)
+		public boolean deleteArticle(int bno, String password) {
+			boolean flag = false;
+			
+			try {				
+				con = getConnection();
+				
+				String sql = "delete from board where bno=? and password=?";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, bno);
+				pstmt.setString(2, password);
+				
+				int result = pstmt.executeUpdate();
+				
+				if(result>0) {
+					flag=true;
+					commit(con);
+				}
+				
+			} catch (Exception e) {
+				rollback(con);
+				e.printStackTrace();
+			} finally {
+				close(con, pstmt);
+			}
+			return flag;			
+		} //delete끝
+		
+		
+		
+		
+	}
+	
 
-}
+
