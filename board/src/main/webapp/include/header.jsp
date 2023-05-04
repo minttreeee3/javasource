@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<!-- 화살표 이미지 갖다쓰기 구글폰트아이콘에서 -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <body>
 <div class="container-fluid">
@@ -25,7 +27,7 @@
           <a class="nav-link" href='<c:url value="/writeForm.jsp" />'>게시글 작성</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href='<c:url value="/list.do" />'>목록으로</a>
+          <a class="nav-link" href='<c:url value="/list.do?criteria=&keyword=&page=1&amount=30" />'>목록으로</a>
         </li>
         <li class="nav-item">
           <a class="nav-link">Disabled</a>
