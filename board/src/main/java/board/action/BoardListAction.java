@@ -50,5 +50,6 @@ public class BoardListAction implements Action {
 		return new ActionForward(false, "listForm.jsp");
 		// request.setAttribute에 담아서 올때는 false ??? 
 	}
+	
 
 }
