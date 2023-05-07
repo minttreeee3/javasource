@@ -378,7 +378,7 @@ public class BoardDAO {
 		}//reply끝
 		
 		
-		//검색 - 위에 getRows랑 합침
+		//검색 - 위에 getRows랑 합침 - 지금은 작동 안함
 		public List<BoardDTO> searchList(String criteria, String keyword) {
 			List<BoardDTO> list = new ArrayList<>();
 			

@@ -40,7 +40,7 @@
       			<th scope="row">${dto.bno}</th>
       			
       			<td>
-      			<!-- 댓글에 들여쓰기 해주려고 -->
+      			<!-- 댓글에 들여쓰기 해주려고! -->
       			<c:if test="${dto.reLev !=0}">
       				<c:forEach begin="0" end="${dto.reLev*1}">
       					&nbsp;
