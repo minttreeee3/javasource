@@ -12,6 +12,10 @@ document.querySelector(".btn-success").addEventListener("click",()=>{
 // readForm을 가져온 후 readForm 전송 - modify.do로 
 	const reaForm = document.querySelector("#readForm");
 
+document.querySelector(".btn-success").addEventListener("click",()=>{
+	readForm.action = "list.do";
+	readForm.submit();
+})
 
 // 답변 클릭시 
 document.querySelector(".btn-secondary").addEventListener("click",()=>{

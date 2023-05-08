@@ -6,16 +6,15 @@ import board.domain.BoardDTO;
 import board.domain.PageDTO;
 import board.persistence.BoardDAO;
 
-public class BoardListService {
+public class BoardTotalService {
 	
-	public List<BoardDTO> getList(PageDTO pageDTO) {
+	public int getTotalRow(PageDTO pageDTO) {
 		
 		// 전체 게시물 가져오기
 		BoardDAO dao = new BoardDAO();
+		int total = dao.totalRows(pageDTO);
 		
-		List<BoardDTO> list = dao.getRows(pageDTO);
-		
-		return list;
+		return total;
 	}
 
 }

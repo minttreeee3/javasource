@@ -1,8 +1,14 @@
 /**
  * 
  */
+
+	const modifyForm = document.querySelector("#modifyForm");
+	
+	
 document.querySelector(".btn-success").addEventListener("click",()=>{
-	location.href = "list.do";
+	//location.href = "list.do";
+	modifyForm.action = "list.do";
+	modifyForm.submit();
 })
 
 
@@ -18,14 +24,11 @@ document.querySelector(".btn-danger").addEventListener("click", () => {
 		alert("비밀번호를 확인해 주세요");
 		password.focus();
 		return;
-	}
+	}	
 	
 	// 사용자가 입력한 비밀번호를 가져와서 
 	// #password 요소의 value값으로 세팅
 	document.querySelector("#password").value = password.value;
-	
-	
-	const modifyForm = document.querySelector("#modifyForm");
 	
 	modifyForm.action = "delete.do";
 	modifyForm.method = "post";

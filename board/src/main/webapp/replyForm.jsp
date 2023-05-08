@@ -38,15 +38,30 @@
   </div>
   
 <!-- 댓글 작성시 원본글의 re_ref, re_lev, re_seq 를 가지고 들어가야함 => 히든태그로 만들기 -->
+	<input type="hidden" name="bno" value="${dto.bno}" />
 	<input type="hidden" name="re_ref" value="${dto.reRef}" />
 	<input type="hidden" name="re_lev" value="${dto.reLev}" />
 	<input type="hidden" name="re_seq" value="${dto.reSeq}" />
 	
-  	<button type="submit" class="btn btn-primary">등록</button>
+	<!-- 댓글 작성 시 페이지 나누기 정보 -->
+	<input type="hidden" name="criteria" value="${pageDTO.criteria}" />
+	<input type="hidden" name="keyword" value="${pageDTO.keyword}" />
+	<input type="hidden" name="page" value="${pageDTO.page}" />
+	<input type="hidden" name="amount" value="${pageDTO.amount}" />	
+	
+  	<button type="submit" class="btn btn-primary">댓글등록</button>
   	<button type="reset" class="btn btn-danger">다시작성</button>
   	<button type="button" class="btn btn-success">목록보기</button>
   
 </form>
-<script src='<c:url value="/js/write.js"/>'></script>
 </main>
+<form action="list.do" id="writeForm">
+	
+	<input type="hidden" name="criteria" value="${pageDTO.criteria}" />
+	<input type="hidden" name="keyword" value="${pageDTO.keyword}" />
+	<input type="hidden" name="page" value="${pageDTO.page}" />
+	<input type="hidden" name="amount" value="${pageDTO.amount}" />	
+			
+</form>
+<script src='<c:url value="/js/write.js"/>'></script>
 <%@ include file="include/footer.jsp"%>

@@ -1,5 +1,7 @@
 package board.action;
 
+import java.net.URLEncoder;
+
 import javax.servlet.http.HttpServletRequest;
 
 import board.service.BoardDeleteService;
@@ -11,6 +13,13 @@ public class BoardDeleteAction implements Action {
 		// get
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		String password = request.getParameter("password");
+
+		// 페이지 나누기 정보
+		String criteria = request.getParameter("criteria");
+		String keyword = URLEncoder.encode(request.getParameter("keyword"), "utf-8");
+		String page = request.getParameter("page");
+		String amount = request.getParameter("amount");
+		
 		
 		//service
 		BoardDeleteService service = new BoardDeleteService();
@@ -18,9 +27,9 @@ public class BoardDeleteAction implements Action {
 		
 		String path = "";
 		if(deleteFlag) {
-			path = "list.do";
+			path = "list.do?criteria="+criteria+"&keyword="+keyword+"&page="+page+"&amount="+amount;
 		} else {
-			path = "modify.do?bno="+bno;
+			path = "modify.do?bno="+bno+"&criteria="+criteria+"&keyword="+keyword+"&page="+page+"&amount="+amount;
 		}
 		
 		

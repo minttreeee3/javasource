@@ -21,6 +21,8 @@
 	<div class="col-auto">
 		<button type="submit" class="btn btn-secondary">검색</button>
 	</div>
+	<input type="hidden" name="page" value="${pageDTO.page}" />
+	<input type="hidden" name="amount" value="${pageDTO.amount}" />
 </form>
 	
 	<table class="table">
@@ -50,7 +52,7 @@
 						subdirectory_arrow_right
 					</span>
       			</c:if>
-      			<a href='<c:url value="/cntUpdate.do?bno=${dto.bno}"/>'>${dto.title}</a>
+      			<a href='${dto.bno}' class="move">${dto.title}</a>
       			</td>
       			<td>${dto.name}</td>
       			<td>${dto.regDate}</td>
@@ -59,6 +61,54 @@
     		</c:forEach>
   		</tbody>
 	</table>	
+<div class="row">
+	<div class="col">		
+		<nav aria-label="page navigation">
+  			<ul class="pagination justify-content-center">
+  
+  			<c:if test="${pageDTO.prev}">
+    			<li class="page-item">
+      				<a class="page-link" href="${pageDTO.startPage-1}">Previous</a>
+    			</li>
+    		</c:if>
+    
+    		<c:forEach begin="${pageDTO.startPage}" end="${pageDTO.endPage}" var="idx">
+    				<!-- 부트스트랩에선 active라는 클래스명을 붙이면 해당숫자가 선택될때 파란색이 됨 -->
+    			<li class="page-item ${pageDTO.page == idx ? 'active' : ''}">
+    				<a class="page-link" href="${idx}">${idx}</a>
+    			</li>
+    		</c:forEach>
+    
+    		<c:if test="${pageDTO.next}">
+    			<li class="page-item">
+      				<a class="page-link" href="${pageDTO.endPage+1}">Next</a>
+    			</li>
+    		</c:if>
+  			
+  			</ul>
+		</nav>			
+	</div>
+	
+	<div class="col-2">
+		<select class="form-select" name="amount" aria-label="">
+			<option value="10" <c:out value="${pageDTO.amount == 10? 'selected' : '' }"/> >10</option>
+			<option value="20" <c:out value="${pageDTO.amount == 20? 'selected' : '' }"/> >20</option>
+			<option value="30" <c:out value="${pageDTO.amount == 30? 'selected' : '' }"/> >30</option>
+			<option value="40" <c:out value="${pageDTO.amount == 40? 'selected' : '' }"/> >40</option>
+		</select>
+	</div>
+</div>
+
+
+
+
+<form action="list.do" id="actionForm">
+	<input type="hidden" name="bno" value="" />
+	<input type="hidden" name="criteria" value="${pageDTO.criteria}" />
+	<input type="hidden" name="keyword" value="${pageDTO.keyword}" />
+	<input type="hidden" name="page" value="${pageDTO.page}" />
+	<input type="hidden" name="amount" value="${pageDTO.amount}" />
+</form>
 <script src='<c:url value="/js/list.js" />'></script>
 </main>
 <%@ include file="include/footer.jsp"%>

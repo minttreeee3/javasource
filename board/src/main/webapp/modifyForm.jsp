@@ -70,6 +70,10 @@
 		</div>		 
 	<!-- bno를 하나 숨겨서 가져감 => update,deleteAction에서 getParameter로 가져가기위해- 나머지는 다 있는데 bno는 위에 없기땜에 -->
 		<input type="hidden" name="bno" value="${dto.bno}" />
+		<input type="hidden" name="criteria" value="${pageDTO.criteria}" />
+		<input type="hidden" name="keyword" value="${pageDTO.keyword}" />
+		<input type="hidden" name="page" value="${pageDTO.page}" />
+		<input type="hidden" name="amount" value="${pageDTO.amount}" />
 		<button type="submit" class="btn btn-primary">수정</button>		
 		<button type="button" class="btn btn-danger">삭제</button>		
 		<button type="button" class="btn btn-success">목록보기</button>
@@ -78,6 +82,10 @@
 <form action="" id="modifyForm">
 	<input type="hidden" name="bno" value="${dto.bno}" />
 	<input type="hidden" name="password" value="" id="password" />
+	<input type="hidden" name="criteria" value="${pageDTO.criteria}" />
+	<input type="hidden" name="keyword" value="${pageDTO.keyword}" />
+	<input type="hidden" name="page" value="${pageDTO.page}" />
+	<input type="hidden" name="amount" value="${pageDTO.amount}" />
 </form>
 
 <script src='<c:url value="/js/modify.js"/>'></script>
